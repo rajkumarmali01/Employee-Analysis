@@ -14,7 +14,7 @@ if uploaded_file is not None:
         
         # Rest of your code...
         required_columns = [
-            'Employee Code', 'Name Of Employee', 'Employement Status',
+            'Employee Code', 'Name of Employee', 'Employment Status',
             'Employee Type', 'Location Name', 'Date of Joining',
             'Department 1.0', 'Location Code', 'Location City'
         ]
