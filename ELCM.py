@@ -36,7 +36,7 @@ if uploaded_file is not None:
             )
             
             df['Old GCC / New GCC'] = df['Department 1.0'].apply(
-                lambda x: 'Old GCC' if str(x).strip().upper() in ['ABEX', 'GDGC'] else 'New GCC'
+                lambda x: 'Old GCC' if str(x).strip().upper() in ['ABEX - GCC', 'Group Data Governance and Control - GCC'] else 'New GCC'
             )
             
             st.success("Data processed successfully!")
