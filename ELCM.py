@@ -31,8 +31,8 @@ if uploaded_file is not None:
                 lambda x: 'New Join' if x > oct1_2024 else 'Movement'
             )
             
-            df['AMD / Out side AMD'] = df['Location City'].apply(
-                lambda x: 'AMD' if str(x).strip().lower() == 'ahmedabad' else 'Out side AMD'
+            df['Ahmedabad / Out side Ahmedabad'] = df['Location City'].apply(
+                lambda x: 'Ahmedabad' if str(x).strip().lower() == 'ahmedabad' else 'Out side Ahmedabad'
             )
             
             df['Old GCC / New GCC'] = df['Department 1.0'].apply(
