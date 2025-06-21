@@ -54,7 +54,7 @@ if main_file is not None:
                     
                     # Required seating columns
                     seating_columns = [
-                        'Employee ID', 'Building Name ', 'Floor', 
+                        'Employee Code', 'Building Name ', 'Floor', 
                         'Wing', 'WS Number ', 'WS Type '
                     ]
                     
@@ -71,7 +71,7 @@ if main_file is not None:
                             df_main,
                             df_seating,
                             left_on='Employee Code',
-                            right_on='Employee ID',
+                            right_on='Employee Code',
                             how='left'
                         )
                         
