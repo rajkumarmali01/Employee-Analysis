@@ -54,7 +54,7 @@ if main_file is not None:
                     
                     # Required seating columns
                     seating_columns = [
-                        'Employee ID ', 'Building Name ', 'Floor', 
+                        'Employee ID', 'Building Name ', 'Floor', 
                         'Wing', 'WS Number ', 'WS Type '
                     ]
                     
