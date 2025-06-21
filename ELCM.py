@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-st.set_page_config(page_title="Employee Data Processor (CSV)", layout="wide")
-st.title("Employee Data Processor with Seating Details")
+st.set_page_config(page_title="Employee Data Processor", layout="wide")
+st.title("Employee Data with Seating Details")
 
 # Upload main employee data
 main_file = st.file_uploader("Upload Main Employee Data CSV", type=["csv"], key="main")
@@ -11,7 +11,7 @@ seating_file = st.file_uploader("Upload Seating Details CSV", type=["csv"], key=
 
 if main_file is not None:
     try:
-        # Read main CSV with correct encoding
+        # Read main CSV
         df_main = pd.read_csv(main_file, encoding='latin1')
         
         # Required columns for main data
@@ -54,8 +54,8 @@ if main_file is not None:
                     
                     # Required seating columns
                     seating_columns = [
-                        'Employee Code', 'Building Name', 'Floor', 
-                        'Wing', 'WS number', 'WS type'
+                        'Employee ID', 'Building Name', 'Floor', 
+                        'Wing', 'WS Number', 'WS Type'
                     ]
                     
                     # Check for missing seating columns
@@ -63,14 +63,20 @@ if main_file is not None:
                     if missing_seating:
                         st.warning(f"Missing columns in seating data: {', '.join(missing_seating)}")
                     else:
-                        # Merge seating details with main data
+                        # Select only required seating columns
                         df_seating = df_seating[seating_columns].copy()
+                        
+                        # Merge seating details with main data
                         df_merged = pd.merge(
                             df_main,
                             df_seating,
-                            on='Employee Code',
+                            left_on='Employee Code',
+                            right_on='Employee ID',
                             how='left'
                         )
+                        
+                        # Drop the duplicate 'Employee ID' column after merge
+                        df_merged = df_merged.drop(columns=['Employee ID'], errors='ignore')
                         
                         # Show merged data
                         st.success("Data processed with seating details!")
@@ -79,12 +85,12 @@ if main_file is not None:
                         # Download merged data
                         csv = df_merged.to_csv(index=False).encode('utf-8')
                         st.download_button(
-                            label="Download Processed Data with Seating Details",
+                            label="Download Data with Seating Details",
                             data=csv,
                             file_name="employee_data_with_seating.csv",
                             mime="text/csv"
                         )
-                        # Set main_df to merged for display
+                        # Set df_main to merged for display
                         df_main = df_merged
                 
                 except Exception as e:
