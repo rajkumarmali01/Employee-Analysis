@@ -11,9 +11,10 @@ seating_file = st.file_uploader("Upload Seating Details CSV", type=["csv"], key=
 
 if main_file is not None:
     try:
-        # Read main CSV
+        # Read and clean main CSV
         df_main = pd.read_csv(main_file, encoding='latin1')
-        st.write("Columns in main file:", df_main.columns.tolist())  # Debug: show main file columns
+        df_main.columns = df_main.columns.str.strip()  # Clean column names
+        st.write("Columns in main file:", df_main.columns.tolist())  # Debug
 
         # Required columns for main data
         required_columns = [
@@ -52,7 +53,8 @@ if main_file is not None:
             if seating_file is not None:
                 try:
                     df_seating = pd.read_csv(seating_file, encoding='latin1')
-                    st.write("Columns in seating file:", df_seating.columns.tolist())  # Debug: show seating file columns
+                    df_seating.columns = df_seating.columns.str.strip()  # Clean column names
+                    st.write("Columns in seating file:", df_seating.columns.tolist())  # Debug
 
                     # These are the exact columns from your screenshot
                     seating_columns = [
