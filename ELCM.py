@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 
 st.set_page_config(page_title="Employee Analysis", layout="wide")
-st.title("GCC Employee👩‍💼👨‍💼Analysis , Department X 🏢 Seating X ⌚Security")
+st.title("GCC Employee Analysis , Department X 🏢 Seating X ⌚Security")
 
 main_file = st.file_uploader("Upload Main Employee Data CSV(ELCM)", type=["csv"], key="main")
 seating_file = st.file_uploader("Upload Master Data Of  Seating  CSV", type=["csv"], key="seating")
