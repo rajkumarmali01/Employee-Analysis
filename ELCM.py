@@ -19,9 +19,10 @@ if main_file is not None:
 
         required_columns = [
             'Employee Code', 'Name of Employee', 'Employment Status',
-            'Employee Type', 'Location Name', 'Date of Joining',
-            'Date of Separation',  # ✅ Added this column
-            'Department 1.0', 'Location Code', 'Location City'
+            'Employee Type', 'Location Name', 'Group Date of Joining',     # ✅ updated name
+            'Date of Separation',
+            'Department 1.0', 'Department 1.1',                            # ✅ new column added
+            'Location Code', 'Location City'
         ]
         missing_cols = [col for col in required_columns if col not in df_main.columns]
         if missing_cols:
@@ -29,13 +30,13 @@ if main_file is not None:
         else:
             df_main = df_main[required_columns].copy()
 
-            # Convert dates
-            df_main['Date of Joining'] = pd.to_datetime(df_main['Date of Joining'], errors='coerce')
+            # ✅ Convert new date field
+            df_main['Group Date of Joining'] = pd.to_datetime(df_main['Group Date of Joining'], errors='coerce')
             df_main['Date of Separation'] = pd.to_datetime(df_main['Date of Separation'], errors='coerce')
 
-            # Derived columns
+            # ✅ Derived columns
             oct1_2024 = datetime(2024, 10, 1)
-            df_main['New join / movment'] = df_main['Date of Joining'].apply(
+            df_main['New join / movment'] = df_main['Group Date of Joining'].apply(
                 lambda x: 'New Join' if pd.notnull(x) and x > oct1_2024 else 'Movement'
             )
             df_main['Ahmedabad / Out side Ahmedabad'] = df_main['Location City'].apply(
